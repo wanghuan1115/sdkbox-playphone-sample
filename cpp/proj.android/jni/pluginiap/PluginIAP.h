@@ -9,7 +9,6 @@
 
 #include <string>
 #include <vector>
-#include <map>
 
 namespace sdkbox
 {
@@ -42,7 +41,7 @@ namespace sdkbox
 
         // Localized price
         std::string price;
-
+        
         // price currency code
         std::string currencyCode;
     };
@@ -88,7 +87,7 @@ namespace sdkbox
         * Called when the product request fails
         */
         virtual void onProductRequestFailure(const std::string& msg) = 0;
-
+        
         /**
          * Called when the restore completed
          */
@@ -136,37 +135,18 @@ namespace sdkbox
         */
         static void removeListener();
     };
-
-    class LeaderboardListener
+    
+    //
+    //
+    class LeaderBoard
     {
-        virtual void onComplete(std::map<std::string, std::string> currentScores) = 0;
-        virtual void onFail() = 0;
-    };
-    class Leaderboard
-    {
-        /**
-        * Set listener for Leaderboard
-        */
-        static void setListener(LeaderboardListener* listener);
-
-        /**
-        * Remove listener for Leaderboard
-        */
-        static void removeListener();
-
-        /**
-        * Post scores to the leaderboard
-        */
+    public:
         static void submitScore(const std::string& leaderboardId, int score);
-
-        /**
-        * Get scores from leaderboard
-        */
-        static void fetchLeaderboard(const std::string& leaderboardId);
+        static void getLeaderboard(const std::string& leaderboardId);
     };
-
     class Achievement
     {
+    public:
         static void unlock(const std::string& achievementId);
     };
 }

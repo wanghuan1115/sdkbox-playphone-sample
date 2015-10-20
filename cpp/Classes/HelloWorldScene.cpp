@@ -6,6 +6,9 @@
 USING_NS_CC;
 using namespace sdkbox;
 
+#define kLevelLeaderBoardId "1434"
+#define kSoldierAchievementId "3622"
+
 template <typename T> std::string tostr(const T& t) { std::ostringstream os; os<<t; return os.str(); }
 
 Scene* HelloWorld::createScene()
@@ -32,29 +35,30 @@ bool HelloWorld::init()
     {
         return false;
     }
-    int winWidth = CCDirector::getInstance()->getWinSize().width;
+    auto winsize = Director::getInstance()->getWinSize();
+    int winWidth = winsize.width;
 
     IAP::setDebug(true);
     IAP::setListener(this);
     IAP::init();
 
-    CCMenuItemFont::setFontSize(48);
+    MenuItemFont::setFontSize(48);
 
     _coinCount = 0;
 
     _txtCoin = Label::create("0", "fonts/Marker Felt.ttf", 32);
-    _txtCoin->setAnchorPoint(CCPoint(0, 0));
-    _txtCoin->setPosition(CCPoint(800, 500));
+    _txtCoin->setAnchorPoint(Vec2(0, 0));
+    _txtCoin->setPosition(Vec2(800, 500));
     addChild(_txtCoin);
 
-    CCMenuItemFont *item = CCMenuItemFont::create("Load", this, menu_selector(HelloWorld::onRequestIAP));
+    auto item = MenuItemFont::create("Load", this, menu_selector(HelloWorld::onRequestIAP));
     item->setPosition(0, 0);
     CCMenuItemFont *item2 = CCMenuItemFont::create("Restore", this, menu_selector(HelloWorld::onRestoreIAP));
     item->setPosition(0, 100);
 
     CCMenu *menu = CCMenu::create(item, item2, NULL);
-    menu->setAnchorPoint(CCPoint(0, 0));
-    menu->setPosition(CCPoint(200, 400));
+    menu->setAnchorPoint(Vec2(0, 0));
+    menu->setPosition(Vec2(200, 400));
     addChild(menu);
 
     _iapMenu = CCMenu::create();
@@ -73,6 +77,36 @@ bool HelloWorld::init()
 
     _products.push_back(test);
     updateIAP(_products);
+
+    //
+    // leaderboard & achievement
+    //
+    int fontsize = 24;
+    auto fontname = "arial";
+
+    auto updateLBMenu = MenuItemFont::create("update leaderboard random [1,100]", [](Ref*) {
+        int score = rand_0_1() * 100 + 1;
+        LeaderBoard::submitScore(kLevelLeaderBoardId, score);
+    });
+    updateLBMenu->setFontNameObj(fontname);
+    updateLBMenu->setFontSizeObj(fontsize);
+
+    auto fetchLBMenu = MenuItemFont::create("fetch ", [](Ref*) {
+        LeaderBoard::getLeaderboard(kLevelLeaderBoardId);
+    });
+    fetchLBMenu->setFontNameObj(fontname);
+    fetchLBMenu->setFontSizeObj(fontsize);
+
+    auto achievementMenu = MenuItemFont::create("achievement test", [](Ref*) {
+        Achievement::unlock(kSoldierAchievementId);
+    });
+    achievementMenu->setFontNameObj(fontname);
+    achievementMenu->setFontSizeObj(fontsize);
+
+    auto moretestMenu = Menu::create(updateLBMenu, fetchLBMenu, achievementMenu, NULL);
+    moretestMenu->setPosition(Vec2(winsize.width/2, winsize.height-100));
+    moretestMenu->alignItemsVerticallyWithPadding(10);
+    addChild(moretestMenu);
 
     return true;
 }

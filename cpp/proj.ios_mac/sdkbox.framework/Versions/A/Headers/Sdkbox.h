@@ -7,8 +7,6 @@
 #ifndef _CC_SDKBOX_H_
 #define _CC_SDKBOX_H_
 
-#define SDKBOX_VERSION_STR  "sdkbox V1.4.0.0"
- 
 namespace sdkbox {
 
     void init( const char* application_token, const char* application_key );

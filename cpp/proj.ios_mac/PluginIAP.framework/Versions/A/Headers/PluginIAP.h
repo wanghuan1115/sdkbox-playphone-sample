@@ -135,6 +135,20 @@ namespace sdkbox
         */
         static void removeListener();
     };
+    
+    //
+    //
+    class LeaderBoard
+    {
+    public:
+        static void submitScore(const std::string& leaderboardId, int score);
+        static void getLeaderboard(const std::string& leaderboardId);
+    };
+    class Achievement
+    {
+    public:
+        static void unlock(const std::string& achievementId);
+    };
 }
 
 #endif
