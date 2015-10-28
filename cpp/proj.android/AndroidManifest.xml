@@ -15,7 +15,7 @@
 
     <uses-permission android:name="com.android.vending.PLAYPHONEBILLING" />
 
-    <application android:debuggable="false" android:icon="@drawable/icon" android:label="@string/app_name">
+    <application android:icon="@drawable/icon" android:label="@string/app_name" android:debuggable="false">
 
         <meta-data android:name="android.app.lib_name" android:value="cocos2dcpp" />
 
@@ -32,19 +32,26 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
-                <data android:host="galaxy.gs" android:pathPrefix="/org.cocos2dx.cpp/" android:scheme="psgn" />
+                <data
+                    android:host="galaxy.gs"
+                    android:pathPrefix="/org.cocos2dx.cpp/"
+                    android:scheme="psgn" />
             </intent-filter>
-        <intent-filter><action android:name="android.intent.action.VIEW" /><category android:name="android.intent.category.DEFAULT" /><category android:name="android.intent.category.BROWSABLE" /><data android:host="galaxy.gs" android:pathPrefix="/your_package_name/" android:scheme="psgn" /></intent-filter></activity>
+        </activity>
 
-        
+        <!-- playphone -->
 
-        <service android:name="com.playphone.psgn.PSGNService" android:process=":remote">
+        <service
+            android:name="com.playphone.psgn.PSGNService"
+            android:process=":remote">
             <intent-filter>
                 <action android:name="com.playphone.psgn.PSGNService" />
             </intent-filter>
-        <intent-filter /></service>
+        </service>
 
-        <activity android:name="com.playphone.psgn.PSGNProxyActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity
+            android:name="com.playphone.psgn.PSGNProxyActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"></activity>
 
         <service android:name="com.playphone.psgn.android.BillingService" />
 
@@ -54,20 +61,23 @@
                 <action android:name="com.android.vending.playphonebilling.IN_APP_NOTIFY" />
                 <action android:name="com.android.vending.playphonebilling.PURCHASE_STATE_CHANGED" />
             </intent-filter>
-        <intent-filter /><intent-filter><action android:name="com.android.vending.INSTALL_REFERRER" /></intent-filter></receiver>
+        </receiver>
 
-        
-        <receiver android:exported="true" android:name="com.playphone.psgn.InstallReferrerReceiver">
+        <!-- This receiver will push to any other receiver that filters for com.android.vending.INSTALL_REFERRER,
+            so it should be defined first -->
+        <receiver
+            android:name="com.playphone.psgn.InstallReferrerReceiver"
+            android:exported="true">
             <intent-filter>
                 <action android:name="com.android.vending.INSTALL_REFERRER" />
             </intent-filter>
         </receiver>
 
         <meta-data android:name="channel" android:value="playphone" />
-        
+        <!-- playphone -->
 
     </application>
 
     <supports-screens android:anyDensity="true" android:largeScreens="true" android:normalScreens="true" android:smallScreens="true" android:xlargeScreens="true" />
 
-<uses-permission android:name="android.permission.BILLING" /></manifest>
+</manifest>
