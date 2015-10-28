@@ -42,6 +42,9 @@ bool HelloWorld::init()
     IAP::setListener(this);
     IAP::init();
 
+    sdkbox::PluginAchievement::init();
+    sdkbox::PluginLeaderboard::init();
+    
     MenuItemFont::setFontSize(48);
 
     _coinCount = 0;
@@ -86,19 +89,19 @@ bool HelloWorld::init()
 
     auto updateLBMenu = MenuItemFont::create("update leaderboard random [1,100]", [](Ref*) {
         int score = rand_0_1() * 100 + 1;
-        LeaderBoard::submitScore(kLevelLeaderBoardId, score);
+        PluginLeaderboard::submitScore(kLevelLeaderBoardId, score);
     });
     updateLBMenu->setFontNameObj(fontname);
     updateLBMenu->setFontSizeObj(fontsize);
 
     auto fetchLBMenu = MenuItemFont::create("fetch ", [](Ref*) {
-        LeaderBoard::getLeaderboard(kLevelLeaderBoardId);
+        PluginLeaderboard::getLeaderboard(kLevelLeaderBoardId);
     });
     fetchLBMenu->setFontNameObj(fontname);
     fetchLBMenu->setFontSizeObj(fontsize);
 
     auto achievementMenu = MenuItemFont::create("achievement test", [](Ref*) {
-        Achievement::unlock(kSoldierAchievementId);
+        PluginAchievement::unlock(kSoldierAchievementId);
     });
     achievementMenu->setFontNameObj(fontname);
     achievementMenu->setFontSizeObj(fontsize);

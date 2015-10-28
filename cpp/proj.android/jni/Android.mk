@@ -10,7 +10,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp ../../Classes/AppDelegate.cpp ../../Classes
 
 LOCAL_LDLIBS := -landroid -llog
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes
-LOCAL_WHOLE_STATIC_LIBRARIES := PluginIAP sdkbox android_native_app_glue
+LOCAL_WHOLE_STATIC_LIBRARIES := PluginIAP sdkbox android_native_app_glue PluginLeaderboard PluginAchievement
 
 LOCAL_STATIC_LIBRARIES := cocos2dx_static
 
@@ -20,3 +20,5 @@ $(call import-add-path, $(LOCAL_PATH))
 $(call import-module,./prebuilt-mk)
 $(call import-module, ./sdkbox)
 $(call import-module, ./pluginiap)
+$(call import-module, ./pluginleaderboard)
+$(call import-module, ./pluginachievement)

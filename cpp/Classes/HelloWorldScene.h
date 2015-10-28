@@ -3,6 +3,8 @@
 
 #include "cocos2d.h"
 #include "PluginIAP/PluginIAP.h"
+#include "PluginAchievement/PluginAchievement.h"
+#include "PluginLeaderboard/PluginLeaderboard.h"
 
 class HelloWorld : public cocos2d::Layer, public sdkbox::IAPListener
 {
