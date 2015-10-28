@@ -9,6 +9,19 @@ using namespace sdkbox;
 #define kLevelLeaderBoardId "1434"
 #define kSoldierAchievementId "3622"
 
+class MyLeaderboardListener : public sdkbox::LeaderboardListener
+{
+public:
+    virtual void onComplete(std::string leaderboard)
+    {
+        CCLOG("MyLeaderboardListener:onComplete: %s", leaderboard.data());
+    }
+    virtual void onFail()
+    {
+        CCLOG("MyLeaderboardListener:onFail");
+    }
+};
+
 template <typename T> std::string tostr(const T& t) { std::ostringstream os; os<<t; return os.str(); }
 
 Scene* HelloWorld::createScene()
@@ -44,6 +57,7 @@ bool HelloWorld::init()
 
     sdkbox::PluginAchievement::init();
     sdkbox::PluginLeaderboard::init();
+    sdkbox::PluginLeaderboard::setListener(new MyLeaderboardListener);
     
     MenuItemFont::setFontSize(48);
 
