@@ -10,7 +10,12 @@
 #include "spine/lua_cocos2dx_spine_manual.hpp"
 #include "3d/lua_cocos2dx_3d_manual.h"
 #include "audioengine/lua_cocos2dx_audioengine_manual.h"
-#include "lua/quick/lua_cocos2dx_quick_manual.hpp"
+#include "PluginLeaderboardLua.hpp"
+#include "PluginLeaderboardLuaHelper.h"
+#include "PluginAchievementLua.hpp"
+#include "PluginAchievementLuaHelper.h"
+#include "PluginIAPLua.hpp"
+#include "PluginIAPLuaHelper.h"
 
 static int lua_module_register(lua_State* L)
 {
@@ -24,8 +29,13 @@ static int lua_module_register(lua_State* L)
     register_spine_module(L);
     register_cocos3d_module(L);
     register_audioengine_module(L);
+    register_all_PluginLeaderboardLua(L);
+    register_all_PluginLeaderboardLua_helper(L);
+    register_all_PluginAchievementLua(L);
+    register_all_PluginAchievementLua_helper(L);
+    register_all_PluginIAPLua(L);
+    register_all_PluginIAPLua_helper(L);
     return 1;
 }
 
 #endif  // __LUA_TEMPLATE_RUNTIME_FRAMEWORKS_RUNTIME_SRC_CLASSES_LUA_MODULE_REGISTER_H__
-
