@@ -11,6 +11,12 @@
 #else
 #include "js_module_register.h"
 #endif
+#include "PluginLeaderboardJS.hpp"
+#include "PluginLeaderboardJSHelper.h"
+#include "PluginAchievementJS.hpp"
+#include "PluginAchievementJSHelper.h"
+#include "PluginIAPJS.hpp"
+#include "PluginIAPJSHelper.h"
 
 USING_NS_CC;
 using namespace CocosDenshion;
@@ -69,7 +75,13 @@ bool AppDelegate::applicationDidFinishLaunching()
     }
 #else
    js_module_register();
-   ScriptingCore* sc = ScriptingCore::getInstance();
+    ScriptingCore* sc = ScriptingCore::getInstance();
+    sc->addRegisterCallback(register_all_PluginLeaderboardJS);
+    sc->addRegisterCallback(register_all_PluginLeaderboardJS_helper);
+    sc->addRegisterCallback(register_all_PluginAchievementJS);
+    sc->addRegisterCallback(register_all_PluginAchievementJS_helper);
+    sc->addRegisterCallback(register_all_PluginIAPJS);
+    sc->addRegisterCallback(register_all_PluginIAPJS_helper);
    sc->start();
    sc->runScript("script/jsb_boot.js");
    ScriptEngineProtocol *engine = ScriptingCore::getInstance();
