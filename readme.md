@@ -1,5 +1,10 @@
 # Plugin with cocos framework 3.6
 
+## Prerequisites
+
+1. Install Playphone Game Store [https://playphone.com/](https://playphone.com/)
+2. Active the Game Store (Launch & go to Main Screen)
+
 Do not want submodule
 ---
 ```
